@@ -32,7 +32,7 @@ public class Store {
         return INST;
     }
 
-    public Collection<Post> findAll() {
+    public Collection<Post> findAllPosts() {
         return posts.values();
     }
     public Collection<Candidate> findAllCandidates() {
