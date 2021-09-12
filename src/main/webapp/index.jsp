@@ -1,7 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
-<%@page import="ru.job4j.dream.model.Post" %>
-<%@page import="ru.job4j.dream.store.Store" %>
-
+<%@ page import="ru.job4j.dream.store.Store" %>
+<%@ page import="ru.job4j.dream.model.Post" %>
 <!doctype html>
 <html lang="en">
 <head>
@@ -22,30 +21,19 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
 
-    <title>Работа мечты!</title>
+    <title>Работа мечты</title>
 </head>
 <body>
 <div class="container">
     <div class="row">
-        <table class="table table-bordered">
-            <tr>
-                <th scope="col">Объявления</th>
-                <th scope="col">Описание вакансии</th>
-                <th scope="col">Дата создания</th>
-            </tr>
-            <tbody>
-            <% for (Post post : Store.instOf().findAll()) {%>
-            <tr>
-                <td><%=post.getName()%>
-                </td>
-                <td><%=post.getDescription()%>
-                </td>
-                <td><%=post.getCreated()%>
-                </td>
-            </tr>
-            <%}%>
-            </tbody>
-        </table>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/posts.jsp">Вакансии</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/candidates.jsp">Кандидаты</a>
+            </li>
+        </ul>
     </div>
 </div>
 </body>
