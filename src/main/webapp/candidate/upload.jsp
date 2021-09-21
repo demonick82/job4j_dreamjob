@@ -12,7 +12,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Upload image</h2>
+    <h2>Добавить фото</h2>
     <form action="<c:url value='/upload.do?id=${param.id}'/>" method="post" enctype="multipart/form-data">
         <div class="checkbox">
             <input type="file" name="file">
