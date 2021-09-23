@@ -66,6 +66,8 @@
                         <th scope="col">Название вакансии</th>
                         <th scope="col">Описание вакансии</th>
                         <th scope="col">Дата создания</th>
+                        <th scope="col">Удалить вакансию</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -82,6 +84,12 @@
                             </td>
                             <td>
                                 <c:out value="${post.created}"/>
+                            </td>
+                            <td>
+                                <a href="<c:url value="/deletePost.do?id=${post.id}"/>"
+                                   class="btn btn-primary" role="button">
+                                    Удалить вакансию
+                                </a>
                             </td>
                         </tr>
                     </c:forEach>

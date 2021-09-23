@@ -44,6 +44,11 @@
         <servlet-name>LogoutServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.LogoutServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DeletePostServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.DeletePostServlet</servlet-class>
+    </servlet>
+
     <servlet-mapping>
         <servlet-name>PostServlet</servlet-name>
         <url-pattern>/posts.do</url-pattern>
@@ -75,5 +80,9 @@
     <servlet-mapping>
         <servlet-name>LogoutServlet</servlet-name>
         <url-pattern>/logout.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DeletePostServlet</servlet-name>
+        <url-pattern>/deletePost.do</url-pattern>
     </servlet-mapping>
 </web-app>
