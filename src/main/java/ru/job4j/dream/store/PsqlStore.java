@@ -65,7 +65,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка создания списка всех вакансий", e);
         }
         return posts;
     }
@@ -82,7 +82,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка создания списка всех кандидатов", e);
         }
         return candidates;
     }
@@ -121,7 +121,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка поиска вакансии", e);
         }
         return post;
     }
@@ -140,7 +140,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка поиска кандидата", e);
         }
         return candidate;
     }
@@ -167,7 +167,7 @@ public class PsqlStore implements Store {
             ps.setInt(1, id);
             ps.execute();
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка удаления вакансии", e);
         }
     }
 
@@ -187,7 +187,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка создания вакансии", e);
         }
     }
 
@@ -201,7 +201,7 @@ public class PsqlStore implements Store {
             ps.setInt(4, post.getId());
             ps.execute();
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка обновления вакансии", e);
         }
     }
 
@@ -218,7 +218,7 @@ public class PsqlStore implements Store {
                 }
             }
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка создания кандидата", e);
         }
     }
 
@@ -231,8 +231,7 @@ public class PsqlStore implements Store {
             ps.setInt(2, candidate.getId());
             ps.execute();
         } catch (Exception e) {
-            LOG.error(String.valueOf(e));
+            LOG.error("Ошибка обновления кандидата", e);
         }
     }
-
 }
