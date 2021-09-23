@@ -13,7 +13,7 @@ after_success:
 
 env:
   global:
-    - CODECOV_TOKEN="e01f1d51-47e4-4686-9516-17370cf6d309"
+    - CODECOV_TOKEN="f3a32a84-3e41-4ecc-90ff-27edd24d395f"
 
 notifications:
   email:
