@@ -11,12 +11,13 @@ import java.time.LocalDate;
 public class PsqlMain {
     public static void main(String[] args) {
         Store store = PsqlStore.instOf();
-        User user1 = new User("vasia", "vasia@mail.ru", "111");
+/*        User user1 = new User("vasia", "vasia@mail.ru", "111");
         User user2 = new User( "petia", "petia@mail.ru", "222");
-        store.saveUser(user1);
-        store.saveUser(user2);
-
-        System.out.println(store.findByEmail("vasia@mail.ru"));
+                store.saveUser(user1);
+        store.saveUser(user2);*/
+        User user = new User("Дмиррий", "ghghg", "123");
+        store.saveUser(user);
+        System.out.println(store.findByEmail("ghghg"));
 
 /*       store.savePost(new Post(0, "Java Job", "work", LocalDate.now()));
         store.savePost(new Post(0, "Java Job", "work1", LocalDate.now()));

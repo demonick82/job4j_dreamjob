@@ -48,6 +48,10 @@
         <servlet-name>DeletePostServlet</servlet-name>
         <servlet-class>ru.job4j.dream.servlet.DeletePostServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegServlet</servlet-name>
+        <servlet-class>ru.job4j.dream.servlet.RegServlet</servlet-class>
+    </servlet>
 
     <servlet-mapping>
         <servlet-name>PostServlet</servlet-name>
@@ -84,5 +88,9 @@
     <servlet-mapping>
         <servlet-name>DeletePostServlet</servlet-name>
         <url-pattern>/deletePost.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegServlet</servlet-name>
+        <url-pattern>/reg.do</url-pattern>
     </servlet-mapping>
 </web-app>

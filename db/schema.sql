@@ -1,3 +1,5 @@
+drop table if exists users;
+
 CREATE TABLE post
 (
     id          SERIAL PRIMARY KEY,
