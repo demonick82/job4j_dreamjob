@@ -4,6 +4,7 @@ import static org.junit.Assert.assertThat;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -34,13 +35,13 @@ public class PostServletTest {
         Store store = MemStore.instOf();
 
         PowerMockito.mockStatic(PsqlStore.class);
-        PowerMockito.when(PsqlStore.instOf()).thenReturn(store);
+        Mockito.when(PsqlStore.instOf()).thenReturn(store);
 
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-        PowerMockito.when(req.getParameter("id")).thenReturn(String.valueOf(0));
-        PowerMockito.when(req.getParameter("name")).thenReturn("Name");
-        PowerMockito.when(req.getParameter("description")).thenReturn("new post");
+        Mockito.when(req.getParameter("id")).thenReturn(String.valueOf(0));
+        Mockito.when(req.getParameter("name")).thenReturn("Name");
+        Mockito.when(req.getParameter("description")).thenReturn("new post");
         new PostServlet().doPost(req, resp);
 
         Post result = store.findAllPosts().iterator().next();
@@ -51,15 +52,17 @@ public class PostServletTest {
     @Test
     public void whenDoPostUpdatePost() throws ServletException, IOException {
         Store store = MemStore.instOf();
+
         Post post = new Post(1, "name", "post", LocalDate.now());
         store.savePost(post);
+
         PowerMockito.mockStatic(PsqlStore.class);
-        when(PsqlStore.instOf()).thenReturn(store);
+        Mockito.when(PsqlStore.instOf()).thenReturn(store);
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-        PowerMockito.when(req.getParameter("id")).thenReturn(String.valueOf(post.getId()));
-        PowerMockito.when(req.getParameter("name")).thenReturn("update name");
-        PowerMockito.when(req.getParameter("description")).thenReturn("update post");
+        Mockito.when(req.getParameter("id")).thenReturn(String.valueOf(post.getId()));
+        Mockito.when(req.getParameter("name")).thenReturn("update name");
+        Mockito.when(req.getParameter("description")).thenReturn("update post");
         new PostServlet().doPost(req, resp);
 
         Post result = store.findAllPosts().iterator().next();

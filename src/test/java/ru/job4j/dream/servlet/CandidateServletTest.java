@@ -2,6 +2,7 @@ package ru.job4j.dream.servlet;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
 import org.powermock.modules.junit4.PowerMockRunner;
@@ -27,12 +28,12 @@ public class CandidateServletTest {
         Store store = MemStore.instOf();
 
         PowerMockito.mockStatic(PsqlStore.class);
-        PowerMockito.when(PsqlStore.instOf()).thenReturn(store);
+        Mockito.when(PsqlStore.instOf()).thenReturn(store);
 
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-        PowerMockito.when(req.getParameter("id")).thenReturn(String.valueOf(0));
-        PowerMockito.when(req.getParameter("name")).thenReturn("Name");
+        Mockito.when(req.getParameter("id")).thenReturn(String.valueOf(0));
+        Mockito.when(req.getParameter("name")).thenReturn("Name");
         new CandidateServlet().doPost(req, resp);
 
         Candidate result = store.findAllCandidates().iterator().next();
@@ -44,12 +45,16 @@ public class CandidateServletTest {
         Store store = MemStore.instOf();
         Candidate candidate = new Candidate(1, "name");
         store.saveCandidate(candidate);
+
         PowerMockito.mockStatic(PsqlStore.class);
-        PowerMockito.when(PsqlStore.instOf()).thenReturn(store);
+        Mockito.when(PsqlStore.instOf()).thenReturn(store);
+
         HttpServletRequest req = mock(HttpServletRequest.class);
         HttpServletResponse resp = mock(HttpServletResponse.class);
-        PowerMockito.when(req.getParameter("id")).thenReturn(String.valueOf(candidate.getId()));
-        PowerMockito.when(req.getParameter("name")).thenReturn("update name");
+
+        Mockito.when(req.getParameter("id")).thenReturn(String.valueOf(candidate.getId()));
+        Mockito.when(req.getParameter("name")).thenReturn("update name");
+
         new CandidateServlet().doPost(req, resp);
 
         Candidate result = store.findAllCandidates().iterator().next();
