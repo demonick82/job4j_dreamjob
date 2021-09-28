@@ -19,7 +19,7 @@ public class MemStore implements Store {
 
 
     private MemStore() {
-        posts.put(1, new Post(1, "Junior Java Job", "Work in Sber",
+/*        posts.put(1, new Post(1, "Junior Java Job", "Work in Sber",
                 LocalDate.of(2021, 8, 12)));
         posts.put(2, new Post(2, "Middle Java Job", "Work in Luxoft",
                 LocalDate.of(2021, 9, 10)));
@@ -27,7 +27,7 @@ public class MemStore implements Store {
                 LocalDate.of(2021, 9, 11)));
         candidates.put(1, new Candidate(1, "Junior Java"));
         candidates.put(2, new Candidate(2, "Middle Java"));
-        candidates.put(3, new Candidate(3, "Senior Java"));
+        candidates.put(3, new Candidate(3, "Senior Java"));*/
     }
 
     public static MemStore instOf() {
