@@ -8,10 +8,26 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function validate() {
+            var name = $('#name').val();
+            var surName = $('#surName').val();
+            var desc = $('#desc').val();
+            $(".error").remove();
+            if (name == '') {
+                $('#name').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите имя</div>')
+            }
+            if (surName == '') {
+                $('#surName').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите фамилию</div>')
+            }
+            if (desc == '') {
+                $('#desc').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите описание</div>')
+            }
+        }
+    </script>
 </head>
+
 <body>
-
-
 <div class="container pt-3">
     <div class="row">
         <div class="card" style="width: 100%">
@@ -21,25 +37,25 @@
             <div class="card-body">
                 <form>
                     <div class="form-group">
-                        <label for="exampleInputName">Имя</label>
-                        <input type="text" class="form-control" id="exampleInputName" aria-describedby="emailHelp">
+                        <label for="name">Имя</label>
+                        <input type="text" class="form-control" id="name">
                     </div>
                     <div class="form-group">
-                        <label for="exampleInputSurName">Фамилия</label>
-                        <input type="text" class="form-control" id="exampleInputSurName">
+                        <label for="surName">Фамилия</label>
+                        <input type="text" class="form-control" id="surName">
                     </div>
                     <div class="form-group">
-                        <label for="InputSex">Пол</label>
-                        <select id="InputSex" class="form-control">
+                        <label for="sex">Пол</label>
+                        <select id="sex" class="form-control">
                             <option selected>М</option>
                             <option>Ж</option>
                         </select>
                     </div>
-
                     <div class="form-group">
-                        <label for="exampleInputDescription">Описание</label>
-                        <input type="text" class="form-control" id="exampleInputDescription">
+                        <label for="desc">Описание</label>
+                        <input type="text" class="form-control" id="desc">
                     </div>
+                    <button type="button" class="btn btn-primary" onclick="return validate();">Submit</button>
                 </form>
             </div>
             <table class="table table-striped">
@@ -72,7 +88,6 @@
                 </tbody>
             </table>
         </div>
-
     </div>
 </div>
 </body>
