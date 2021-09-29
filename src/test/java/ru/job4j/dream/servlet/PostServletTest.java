@@ -1,5 +1,6 @@
 package ru.job4j.dream.servlet;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import org.junit.Assert;
@@ -19,7 +20,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.*;
 
@@ -43,10 +43,10 @@ public class PostServletTest {
         new PostServlet().doPost(req, resp);
 
         Post result = store.findAllPosts().iterator().next();
-        Assert.assertThat(result.getName(), is("Name"));
+        assertEquals(result.getName(), ("Name"));
     }
 
- /*   @Test
+    @Test
     public void whenDoPostUpdatePost() throws ServletException, IOException {
         Store store = MemStore.instOf();
 
@@ -64,6 +64,6 @@ public class PostServletTest {
         when(req.getParameter("description")).thenReturn("update post");
         new PostServlet().doPost(req, resp);
         Post result = store.findAllPosts().iterator().next();
-        Assert.assertThat(result.getName(), is("update name"));
-    }*/
+        assertEquals(result.getName(), ("update name"));
+    }
 }

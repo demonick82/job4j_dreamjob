@@ -37,10 +37,10 @@ public class CandidateServletTest {
         new CandidateServlet().doPost(req, resp);
 
         Candidate result = store.findAllCandidates().iterator().next();
-        assertThat(result.getName(), is("Name"));
+        assertEquals(result.getName(),("Name"));
     }
 
-/*    @Test
+    @Test
     public void whenDoPostUpdatePost() throws ServletException, IOException {
         Store store = MemStore.instOf();
         Candidate candidate = new Candidate(1, "name");
@@ -54,6 +54,6 @@ public class CandidateServletTest {
         new CandidateServlet().doPost(req, resp);
 
         Candidate result = store.findAllCandidates().iterator().next();
-        assertThat(result.getName(), is("update name"));
-    }*/
+        assertEquals(result.getName(), ("update name"));
+    }
 }
