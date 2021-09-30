@@ -10,18 +10,39 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script>
         function validate() {
-            var name = $('#name').val();
-            var surName = $('#surName').val();
-            var desc = $('#desc').val();
+            const name = $('#name').val();
+            const surName = $('#surName').val();
+            const desc = $('#desc').val();
+            let valid = true;
             $(".error").remove();
             if (name == '') {
                 $('#name').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите имя</div>')
+                valid = false;
             }
             if (surName == '') {
                 $('#surName').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите фамилию</div>')
+                valid = false
             }
             if (desc == '') {
                 $('#desc').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите описание</div>')
+                valid = false
+            }
+            return valid;
+        }
+    </script>
+    <script>
+        function addRow() {
+            if (validate()) {
+                const name = $('#name').val();
+                const surName = $('#surName').val();
+                const sex = $('#sex').val();
+                const desc = $('#desc').val();
+                $('#table tr:last').after('<tr>'
+                    + '<td>' + name + '</td>'
+                    + '<td>' + surName + '</td>'
+                    + '<td>' + sex + '</td>'
+                    + '<td>' + desc + '</td>'
+                    + '</tr>');
             }
         }
     </script>
@@ -55,36 +76,19 @@
                         <label for="desc">Описание</label>
                         <input type="text" class="form-control" id="desc">
                     </div>
-                    <button type="button" class="btn btn-primary" onclick="return validate();">Submit</button>
+                    <button type="button" class="btn btn-primary" onclick="addRow()">Добавить пользователя</button>
                 </form>
             </div>
-            <table class="table table-striped">
+            <table class="table table-bordered" id="table">
                 <thead>
                 <tr>
-                    <th scope="col">№</th>
                     <th scope="col">Имя</th>
                     <th scope="col">Фамилия</th>
                     <th scope="col">Пол</th>
                     <th scope="col">Описание</th>
-
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Иван</td>
-                    <td>Иванов</td>
-                    <td>М</td>
-                    <td>Программист</td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Петр</td>
-                    <td>Петров</td>
-                    <td>М</td>
-                    <td>Тестер</td>
-                </tr>
-
                 </tbody>
             </table>
         </div>
