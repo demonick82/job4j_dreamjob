@@ -21,14 +21,15 @@
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-
-
     <title>Работа мечты</title>
 </head>
 <body>
 <div class="container pt-3">
     <div class="row">
         <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
             </li>
@@ -64,6 +65,7 @@
                     <thead>
                     <tr>
                         <th scope="col">ФИО Кандидата</th>
+                        <th scope="col">Город</th>
                         <th scope="col">Фото</th>
                         <th scope="col">Удалить кандидата</th>
                     </tr>
@@ -78,17 +80,19 @@
                                 <c:out value="${candidate.name}"/>
                             </td>
                             <td>
-                                <img src="<c:url value='/download.do?name=${candidate.id}.jpg'/>" width="100px"
-                                     height="100px" alt="Фото кандидата"/>
-                                <a href="<c:url value='/candidate/upload.jsp?id=${candidate.id}'/>">
-                                <i class="fa fa-edit mr-3"></i>
-                                </a>
-                            </td>
+                                <c:out value="${candidate.cityName}"/>
                             </td>
                             <td>
-                                <a href="<c:url value="/deleteCandidate.do?id=${candidate.id}"/>"
-                                   class="btn btn-primary" role="button">
-                                    Удалить кандидата
+                                <img src="<c:url value='/download.do?name=${candidate.id}.jpg'/>" width="100px"
+                                     height="100px" alt="Фото кандидата"/>
+                                <br>
+                                <a href="<c:url value='/candidate/upload.jsp?id=${candidate.id}'/>">
+                                    <i class="fa fa-edit mr-3">Редактировать</i>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="<c:url value="/deleteCandidate.do?id=${candidate.id}"/>">
+                                    <i class="fa fa-trash">Удалить</i>
                                 </a>
                             </td>
                         </tr>

@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class CandidateServlet extends HttpServlet {
     @Override
@@ -20,7 +21,7 @@ public class CandidateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         PsqlStore.instOf().saveCandidate(new Candidate(Integer.parseInt(req.getParameter("id")),
-                req.getParameter("name")));
+                req.getParameter("name"), req.getParameter("city"), LocalDate.now()));
         resp.sendRedirect(req.getContextPath() + "/candidates.do");
     }
 }

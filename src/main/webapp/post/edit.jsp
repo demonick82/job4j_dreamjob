@@ -22,7 +22,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
+    <script>
+        function validate() {
+            const name = $('#name').val();
+            const desc = $('#desc').val();
+            let valid = true;
+            $(".error").remove();
+            if (name == '') {
+                $('#name').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите имя</div>')
+                valid = false;
+            }
+            if (desc == '') {
+                $('#desc').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите описание</div>')
+                valid = false;
+            }
+            return valid;
+        }
+    </script>
     <title>Работа мечты</title>
 </head>
 <body>
@@ -36,6 +52,9 @@
 <div class="container pt-3">
     <div class="row">
         <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
+            </li>
             <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
             </li>
@@ -74,14 +93,14 @@
                 <form action="<%=request.getContextPath()%>/posts.do?id=<%=post.getId()%>" method="post">
                     <div class="form-group">
                         <label>Имя</label>
-                        <input type="text" class="form-control" name="name" value="<%=post.getName()%>">
+                        <input type="text" class="form-control" id="name" name="name" value="<%=post.getName()%>">
                     </div>
                     <div class="form-group">
                         <label>Описание</label>
-                        <input type="text" class="form-control" name="description" value="<%=post.getDescription()%>">
+                        <input type="text" class="form-control" id="desc" name="description"
+                               value="<%=post.getDescription()%>">
                     </div>
-
-                    <button type="submit" class="btn btn-primary">Сохранить</button>
+                    <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>
                 </form>
             </div>
         </div>

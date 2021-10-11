@@ -1,4 +1,7 @@
+drop table if exists post;
+drop table if exists candidates;
 drop table if exists users;
+drop table if exists cities;
 
 CREATE TABLE post
 (
@@ -10,8 +13,11 @@ CREATE TABLE post
 
 CREATE TABLE candidates
 (
-    id   SERIAL PRIMARY KEY,
-    name text
+    id      SERIAL PRIMARY KEY,
+    name    text,
+    city_id text,
+    created date
+
 );
 
 CREATE TABLE users
@@ -20,4 +26,10 @@ CREATE TABLE users
     name     text,
     email    text unique,
     password text
+);
+
+CREATE TABLE cities
+(
+    id   serial primary key,
+    name text unique
 );

@@ -4,6 +4,7 @@ import org.apache.commons.dbcp2.BasicDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -57,6 +58,26 @@ public class PsqlStore implements Store {
         List<Post> posts = new ArrayList<>();
         try (Connection cn = pool.getConnection();
              PreparedStatement ps = cn.prepareStatement("SELECT * FROM post")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    posts.add(new Post(it.getInt("id"), it.getString("name"),
+                            it.getString("description"), it.getTimestamp("created").
+                            toLocalDateTime().toLocalDate()));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("Ошибка создания списка всех вакансий", e);
+        }
+        return posts;
+    }
+
+    @Override
+    public Collection<Post> findAllPostsToday() {
+        List<Post> posts = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM post where " +
+                     "created between current_timestamp - interval '1 day' AND current_timestamp")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -156,7 +177,29 @@ public class PsqlStore implements Store {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    candidates.add(new Candidate(it.getInt("id"), it.getString("name")));
+                    candidates.add(new Candidate(it.getInt("id"), it.getString("name"),
+                            it.getString("city_id"), it.getTimestamp("created").
+                            toLocalDateTime().toLocalDate()));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("Ошибка создания списка всех кандидатов", e);
+        }
+        return candidates;
+    }
+
+    @Override
+    public Collection<Candidate> findAllCandidatesToday() {
+        List<Candidate> candidates = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidates where   created between " +
+                     "current_timestamp - interval '1 day' AND current_timestamp")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    candidates.add(new Candidate(it.getInt("id"), it.getString("name"),
+                            it.getString("city_id"), it.getTimestamp("created").
+                            toLocalDateTime().toLocalDate()));
                 }
             }
         } catch (Exception e) {
@@ -184,7 +227,9 @@ public class PsqlStore implements Store {
             ps.execute();
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
-                    candidate = new Candidate(it.getInt("id"), it.getString("name"));
+                    candidate = new Candidate(it.getInt("id"), it.getString("name"),
+                            it.getString("city_id"), it.getTimestamp("created").
+                            toLocalDateTime().toLocalDate());
                 }
             }
         } catch (Exception e) {
@@ -208,10 +253,12 @@ public class PsqlStore implements Store {
 
     private void createCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidates(name) VALUES (?)",
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO candidates(name,city_id,created) VALUES (?,?,?)",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
+            ps.setString(2, candidate.getCityName());
+            ps.setDate(3, Date.valueOf(candidate.getCreated()));
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
                 if (id.next()) {
@@ -225,11 +272,14 @@ public class PsqlStore implements Store {
 
     private void updateCandidate(Candidate candidate) {
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("update candidates set name=? where id=?",
+             PreparedStatement ps = cn.prepareStatement("update candidates set name=?, city_id=?, created=?  where id=?",
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
-            ps.setInt(2, candidate.getId());
+            ps.setString(2, candidate.getCityName());
+            ps.setDate(3, Date.valueOf(candidate.getCreated()));
+            ps.setInt(4, candidate.getId());
+
             ps.execute();
         } catch (Exception e) {
             LOG.error("Ошибка обновления кандидата", e);
@@ -287,6 +337,49 @@ public class PsqlStore implements Store {
             ps.execute();
         } catch (Exception e) {
             LOG.error("Ошибка удаления пользователя", e);
+        }
+    }
+
+    @Override
+    public Collection<City> findAllCity() {
+        List<City> cities = new ArrayList<>();
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM cities")
+        ) {
+            try (ResultSet it = ps.executeQuery()) {
+                while (it.next()) {
+                    cities.add(new City(it.getString("name")));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("Ошибка создания списка городов", e);
+        }
+        return cities;
+    }
+
+    @Override
+    public void saveCity(City city) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("INSERT INTO cities(name) VALUES (?)",
+                     PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, city.getName());
+            ps.execute();
+        } catch (Exception e) {
+            LOG.error("Город уже существует", e);
+        }
+    }
+
+    @Override
+    public void deleteCity(City city) {
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("delete from cities where name=?",
+                     PreparedStatement.RETURN_GENERATED_KEYS)
+        ) {
+            ps.setString(1, city.getName());
+            ps.execute();
+        } catch (Exception e) {
+            LOG.error("Ошибка удаления города", e);
         }
 
     }

@@ -1,6 +1,7 @@
 package ru.job4j.dream.store;
 
 import ru.job4j.dream.model.Candidate;
+import ru.job4j.dream.model.City;
 import ru.job4j.dream.model.Post;
 import ru.job4j.dream.model.User;
 
@@ -61,8 +62,18 @@ public class MemStore implements Store {
         return posts.values();
     }
 
+    @Override
+    public Collection<Post> findAllPostsToday() {
+        return null;
+    }
+
     public Collection<Candidate> findAllCandidates() {
         return candidates.values();
+    }
+
+    @Override
+    public Collection<Candidate> findAllCandidatesToday() {
+        return null;
     }
 
     public void deleteCandidate(int id) {
@@ -86,6 +97,21 @@ public class MemStore implements Store {
 
     @Override
     public void deleteUser(int id) {
+
+    }
+
+    @Override
+    public Collection<City> findAllCity() {
+        return null;
+    }
+
+    @Override
+    public void saveCity(City city) {
+
+    }
+
+    @Override
+    public void deleteCity(City city) {
 
     }
 

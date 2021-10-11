@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
+
 <!doctype html>
 <html lang="en">
 <head>
@@ -26,6 +28,9 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
             </li>
             <li class="nav-item">
@@ -48,6 +53,26 @@
                 Сегодняшние вакансии.
             </div>
             <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">Название вакансии</th>
+                        <th scope="col">Описание вакансии</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${posts}" var="post">
+                        <tr>
+                            <td>
+                                <c:out value="${post.name}"/>
+                            </td>
+                            <td>
+                                <c:out value="${post.description}"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
@@ -57,6 +82,31 @@
                 Сегодняшние кандидаты.
             </div>
             <div class="card-body">
+                <table class="table table-bordered">
+                    <thead>
+                    <tr>
+                        <th scope="col">ФИО Кандидата</th>
+                        <th scope="col">Город</th>
+                        <th scope="col">Фото</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${candidates}" var="candidate">
+                        <tr>
+                            <td>
+                                <c:out value="${candidate.name}"/>
+                            </td>
+                            <td>
+                                <c:out value="${candidate.cityName}"/>
+                            </td>
+                            <td>
+                                <img src="<c:url value='/download.do?name=${candidate.id}.jpg'/>" width="100px"
+                                     height="100px" alt="Фото кандидата"/>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

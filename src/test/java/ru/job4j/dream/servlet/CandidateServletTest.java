@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.time.LocalDate;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -43,7 +44,7 @@ public class CandidateServletTest {
     @Test
     public void whenDoPostUpdatePost() throws ServletException, IOException {
         Store store = MemStore.instOf();
-        Candidate candidate = new Candidate(1, "name");
+        Candidate candidate = new Candidate(1, "name","city", LocalDate.now());
         store.saveCandidate(candidate);
         PowerMockito.mockStatic(PsqlStore.class);
         when(PsqlStore.instOf()).thenReturn(store);

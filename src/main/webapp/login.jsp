@@ -19,7 +19,23 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
             integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
             crossorigin="anonymous"></script>
-
+    <script>
+        function validate() {
+            const email = $('#email').val();
+            const password = $('#password').val();
+            let valid = true;
+            $(".error").remove();
+            if (email == '') {
+                $('#email').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите почту</div>')
+                valid = false;
+            }
+            if (password == '') {
+                $('#password').after('<div class="error" style="color:#ff0000; font-weight: bold">Введите пароль</div>')
+                valid = false
+            }
+            return valid;
+        }
+    </script>
     <title>Работа мечты</title>
 </head>
 <body>
@@ -38,18 +54,13 @@
                 <form action="<%=request.getContextPath()%>/auth.do" method="post">
                     <div class="form-group">
                         <label>Почта</label>
-                        <input type="text" class="form-control" name="email">
+                        <input type="text" class="form-control" id="email" name="email" >
                     </div>
                     <div class="form-group">
                         <label>Пароль</label>
-                        <input type="text" class="form-control" name="password">
+                        <input type="text" class="form-control" id="password" name="password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                    <c:if test="${not empty error}">
-                        <div style="color:#ff0000; font-weight: bold; margin: 30px 0;">
-                            <c:out value="${error}"/>
-                        </div>
-                    </c:if>
+                    <button type="submit" class="btn btn-primary" onclick="return validate()">Войти</button>
                 </form>
 
             </div>

@@ -30,6 +30,9 @@
     <div class="row">
         <ul class="nav">
             <li class="nav-item">
+                <a class="nav-link" href="<%=request.getContextPath()%>/index.do">Главная</a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="<%=request.getContextPath()%>/posts.do">Вакансии</a>
             </li>
             <li class="nav-item">
@@ -86,9 +89,8 @@
                                 <c:out value="${post.created}"/>
                             </td>
                             <td>
-                                <a href="<c:url value="/deletePost.do?id=${post.id}"/>"
-                                   class="btn btn-primary" role="button">
-                                    Удалить вакансию
+                                <a href="<c:url value="/deletePost.do?id=${post.id}"/>">
+                                <i class="fa fa-trash">Удалить</i>
                                 </a>
                             </td>
                         </tr>
