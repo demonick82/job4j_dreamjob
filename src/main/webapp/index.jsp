@@ -58,6 +58,8 @@
                     <tr>
                         <th scope="col">Название вакансии</th>
                         <th scope="col">Описание вакансии</th>
+                        <th scope="col">Дата создания вакансии</th>
+
                     </tr>
                     </thead>
                     <tbody>
@@ -68,6 +70,9 @@
                             </td>
                             <td>
                                 <c:out value="${post.description}"/>
+                            </td>
+                            <td>
+                                <c:out value="${post.created}"/>
                             </td>
                         </tr>
                     </c:forEach>
@@ -86,8 +91,9 @@
                     <thead>
                     <tr>
                         <th scope="col">ФИО Кандидата</th>
-                        <th scope="col">Город</th>
                         <th scope="col">Фото</th>
+                        <th scope="col">Город</th>
+                        <th scope="col">Дата создания резюме</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -97,11 +103,14 @@
                                 <c:out value="${candidate.name}"/>
                             </td>
                             <td>
+                                <img src="<c:url value='/download.do?name=${candidate.id}.jpg'/>" width="100px"
+                                     height="100px" alt="Фото кандидата"/>
+                            </td>
+                            <td>
                                 <c:out value="${candidate.cityName}"/>
                             </td>
                             <td>
-                                <img src="<c:url value='/download.do?name=${candidate.id}.jpg'/>" width="100px"
-                                     height="100px" alt="Фото кандидата"/>
+                                <c:out value="${candidate.created}"/>
                             </td>
                         </tr>
                     </c:forEach>

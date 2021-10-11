@@ -65,8 +65,8 @@
                     <thead>
                     <tr>
                         <th scope="col">ФИО Кандидата</th>
-                        <th scope="col">Город</th>
                         <th scope="col">Фото</th>
+                        <th scope="col">Город</th>
                         <th scope="col">Удалить кандидата</th>
                     </tr>
                     </thead>
@@ -80,15 +80,15 @@
                                 <c:out value="${candidate.name}"/>
                             </td>
                             <td>
-                                <c:out value="${candidate.cityName}"/>
-                            </td>
-                            <td>
                                 <img src="<c:url value='/download.do?name=${candidate.id}.jpg'/>" width="100px"
                                      height="100px" alt="Фото кандидата"/>
                                 <br>
                                 <a href="<c:url value='/candidate/upload.jsp?id=${candidate.id}'/>">
                                     <i class="fa fa-edit mr-3">Редактировать</i>
                                 </a>
+                            </td>
+                            <td>
+                                <c:out value="${candidate.cityName}"/>
                             </td>
                             <td>
                                 <a href="<c:url value="/deleteCandidate.do?id=${candidate.id}"/>">
