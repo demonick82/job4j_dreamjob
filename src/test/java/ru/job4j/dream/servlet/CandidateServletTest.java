@@ -35,16 +35,20 @@ public class CandidateServletTest {
 
         when(req.getParameter("id")).thenReturn(String.valueOf(0));
         when(req.getParameter("name")).thenReturn("Name");
+        when(req.getParameter("city")).thenReturn(String.valueOf(1));
+
         new CandidateServlet().doPost(req, resp);
 
         Candidate result = store.findAllCandidates().iterator().next();
         assertEquals(result.getName(),("Name"));
+        assertEquals(result.getCityId(),(1));
+
     }
 
     @Test
     public void whenDoPostUpdatePost() throws ServletException, IOException {
         Store store = MemStore.instOf();
-        Candidate candidate = new Candidate(1, "name",Integer.parseInt("city"), LocalDate.now());
+        Candidate candidate = new Candidate(1, "name",1, LocalDate.now());
         store.saveCandidate(candidate);
         PowerMockito.mockStatic(PsqlStore.class);
         when(PsqlStore.instOf()).thenReturn(store);
@@ -52,9 +56,13 @@ public class CandidateServletTest {
         HttpServletResponse resp = mock(HttpServletResponse.class);
         when(req.getParameter("id")).thenReturn(String.valueOf(candidate.getId()));
         when(req.getParameter("name")).thenReturn("update name");
+        when(req.getParameter("city")).thenReturn(String.valueOf(candidate.getCityId()));
+
         new CandidateServlet().doPost(req, resp);
 
         Candidate result = store.findAllCandidates().iterator().next();
         assertEquals(result.getName(), ("update name"));
+        assertEquals(result.getCityId(), (1));
+
     }
 }
