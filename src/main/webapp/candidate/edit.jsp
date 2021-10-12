@@ -25,8 +25,8 @@
     </script>
     <script>
         function validate() {
-            const name =$('#name').val();
-            const cityName=$('#city').val();
+            const name = $('#name').val();
+            const cityName = $('#city').val();
             let valid = true;
             $(".error").remove();
             if (name == '') {
@@ -48,7 +48,7 @@
                 dataType: 'json'
             }).done(function (data) {
                 for (var city of data) {
-                    $('#city').append(`<option>${city.name}</option>`)
+                    $('#city').append(`<option value="${city.id}">${city.name}</option>`)
                 }
             }).fail(function (err) {
                 console.log(err);
@@ -60,7 +60,7 @@
 <body>
 <%
     String id = request.getParameter("id");
-    Candidate candidate = new Candidate(0, "","", LocalDate.now());
+    Candidate candidate = new Candidate(0, "", 1, LocalDate.now());
     if (id != null) {
         candidate = PsqlStore.instOf().candidateFindById(Integer.valueOf(id));
     }
@@ -113,8 +113,8 @@
                     </div>
                     <div class="form-group">
                         <label for="city">Город</label>
-                        <select class="form-control" id="city" name="city" value="<%=candidate.getCityName()%>">
-                            <option selected>Не выбрано</option>
+                        <select class="form-control" id="city" name="city" value="<%=candidate.getCityId()%>">
+                            <option value="0">Не выбрано</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-primary" onclick="return validate()">Сохранить</button>

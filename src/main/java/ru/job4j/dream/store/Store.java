@@ -43,5 +43,8 @@ public interface Store {
 
     void deleteCity(City city);
 
+    City cityFindById(int id);
+
+
 }
 

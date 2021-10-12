@@ -178,7 +178,7 @@ public class PsqlStore implements Store {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     candidates.add(new Candidate(it.getInt("id"), it.getString("name"),
-                            it.getString("city_id"), it.getTimestamp("created").
+                            it.getInt("city_id"), it.getTimestamp("created").
                             toLocalDateTime().toLocalDate()));
                 }
             }
@@ -198,7 +198,7 @@ public class PsqlStore implements Store {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
                     candidates.add(new Candidate(it.getInt("id"), it.getString("name"),
-                            it.getString("city_id"), it.getTimestamp("created").
+                            it.getInt("city_id"), it.getTimestamp("created").
                             toLocalDateTime().toLocalDate()));
                 }
             }
@@ -228,7 +228,7 @@ public class PsqlStore implements Store {
             try (ResultSet it = ps.executeQuery()) {
                 if (it.next()) {
                     candidate = new Candidate(it.getInt("id"), it.getString("name"),
-                            it.getString("city_id"), it.getTimestamp("created").
+                            it.getInt("city_id"), it.getTimestamp("created").
                             toLocalDateTime().toLocalDate());
                 }
             }
@@ -257,7 +257,7 @@ public class PsqlStore implements Store {
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
-            ps.setString(2, candidate.getCityName());
+            ps.setInt(2, candidate.getCityId());
             ps.setDate(3, Date.valueOf(candidate.getCreated()));
             ps.execute();
             try (ResultSet id = ps.getGeneratedKeys()) {
@@ -276,7 +276,7 @@ public class PsqlStore implements Store {
                      PreparedStatement.RETURN_GENERATED_KEYS)
         ) {
             ps.setString(1, candidate.getName());
-            ps.setString(2, candidate.getCityName());
+            ps.setInt(2, candidate.getCityId());
             ps.setDate(3, Date.valueOf(candidate.getCreated()));
             ps.setInt(4, candidate.getId());
 
@@ -348,7 +348,7 @@ public class PsqlStore implements Store {
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
-                    cities.add(new City(it.getString("name")));
+                    cities.add(new City(it.getInt("id"), it.getString("name")));
                 }
             }
         } catch (Exception e) {
@@ -382,5 +382,24 @@ public class PsqlStore implements Store {
             LOG.error("Ошибка удаления города", e);
         }
 
+    }
+
+    @Override
+    public City cityFindById(int id) {
+        City city = null;
+        try (Connection cn = pool.getConnection();
+             PreparedStatement ps = cn.prepareStatement("select * from cities where id=?")
+        ) {
+            ps.setInt(1, id);
+            ps.execute();
+            try (ResultSet it = ps.executeQuery()) {
+                if (it.next()) {
+                    city = new City(it.getInt("id"), it.getString("name"));
+                }
+            }
+        } catch (Exception e) {
+            LOG.error("Ошибка поиска города", e);
+        }
+        return city;
     }
 }

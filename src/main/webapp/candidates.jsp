@@ -1,3 +1,5 @@
+<%@ page import="ru.job4j.dream.model.City" %>
+<%@ page import="ru.job4j.dream.store.PsqlStore" %>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core" %>
 
@@ -88,7 +90,12 @@
                                 </a>
                             </td>
                             <td>
-                                <c:out value="${candidate.cityName}"/>
+                                <c:set var="cityId" value="${candidate.cityId}" scope="request"/>
+                                <%
+                                    int cityid = (int) request.getAttribute("cityId");
+                                    City city = PsqlStore.instOf().cityFindById(cityid);
+                                %>
+                                <%=city.getName()%>
                             </td>
                             <td>
                                 <a href="<c:url value="/deleteCandidate.do?id=${candidate.id}"/>">

@@ -15,9 +15,8 @@ CREATE TABLE candidates
 (
     id      SERIAL PRIMARY KEY,
     name    text,
-    city_id text,
+    city_id int,
     created date
-
 );
 
 CREATE TABLE users

@@ -116,6 +116,11 @@ public class MemStore implements Store {
     }
 
     @Override
+    public City cityFindById(int id) {
+        return null;
+    }
+
+    @Override
     public void deletePost(int id) {
         posts.remove(id);
     }

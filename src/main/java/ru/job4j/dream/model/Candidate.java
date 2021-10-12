@@ -6,34 +6,18 @@ import java.util.Objects;
 public class Candidate {
     private int id;
     private String name;
-    private String cityName;
+    private int cityId;
     private LocalDate created;
 
-    public Candidate(int id, String name, String cityName, LocalDate created) {
+    public Candidate(int id, String name, int cityId, LocalDate created) {
         this.id = id;
         this.name = name;
-        this.cityName = cityName;
+        this.cityId = cityId;
         this.created = created;
     }
 
     public int getId() {
         return id;
-    }
-
-    public String getCityName() {
-        return cityName;
-    }
-
-    public LocalDate getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDate created) {
-        this.created = created;
-    }
-
-    public void setCityName(String cityName) {
-        this.cityName = cityName;
     }
 
     public void setId(int id) {
@@ -48,6 +32,21 @@ public class Candidate {
         this.name = name;
     }
 
+    public int getCityId() {
+        return cityId;
+    }
+
+    public void setCityId(int city_id) {
+        this.cityId = city_id;
+    }
+
+    public LocalDate getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDate created) {
+        this.created = created;
+    }
 
     @Override
     public boolean equals(Object o) {
@@ -55,14 +54,14 @@ public class Candidate {
         if (o == null || getClass() != o.getClass()) return false;
         Candidate candidate = (Candidate) o;
         return id == candidate.id &&
+                cityId == candidate.cityId &&
                 Objects.equals(name, candidate.name) &&
-                Objects.equals(cityName, candidate.cityName) &&
                 Objects.equals(created, candidate.created);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, cityName, created);
+        return Objects.hash(id, name, cityId, created);
     }
 
     @Override
@@ -70,7 +69,7 @@ public class Candidate {
         return "Candidate{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", city_id='" + cityName + '\'' +
+                ", city_id=" + cityId +
                 ", created=" + created +
                 '}';
     }
