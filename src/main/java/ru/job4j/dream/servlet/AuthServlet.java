@@ -21,7 +21,7 @@ public class AuthServlet extends HttpServlet {
         if (user != null && user.getPassword().equals(password)) {
             HttpSession sc = req.getSession();
             sc.setAttribute("user", user);
-            resp.sendRedirect(req.getContextPath() + "/posts.do");
+            resp.sendRedirect(req.getContextPath() + "/index.do");
 
         } else {
             req.setAttribute("error", "Не верный email или пароль");
