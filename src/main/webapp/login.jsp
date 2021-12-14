@@ -42,7 +42,7 @@
 <div class="container pt-3">
     <div class="text-right">
         <a href="<%=request.getContextPath()%>/reg.jsp">
-            <button type="submit" class="btn btn-outline-primary">Зарегестрировать нового пользователя</button>
+            <button type="submit" class="btn btn-outline-primary">Зарегистрировать нового пользователя</button>
         </a>
     </div>
     <div class="row">
