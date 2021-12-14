@@ -76,8 +76,8 @@ public class PsqlStore implements Store {
     public Collection<Post> findAllPostsToday() {
         List<Post> posts = new ArrayList<>();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM post where " +
-                     "created between current_timestamp - interval '1 day' AND current_timestamp")
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM post where "
+                     + "created between current_timestamp - interval '1 day' AND current_timestamp")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {
@@ -192,8 +192,8 @@ public class PsqlStore implements Store {
     public Collection<Candidate> findAllCandidatesToday() {
         List<Candidate> candidates = new ArrayList<>();
         try (Connection cn = pool.getConnection();
-             PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidates where   created between " +
-                     "current_timestamp - interval '1 day' AND current_timestamp")
+             PreparedStatement ps = cn.prepareStatement("SELECT * FROM candidates where   created between "
+                     + "current_timestamp - interval '1 day' AND current_timestamp")
         ) {
             try (ResultSet it = ps.executeQuery()) {
                 while (it.next()) {

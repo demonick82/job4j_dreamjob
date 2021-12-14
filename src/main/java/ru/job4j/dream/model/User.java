@@ -1,6 +1,7 @@
 package ru.job4j.dream.model;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class User {
     private int id;
@@ -48,13 +49,17 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         User user = (User) o;
-        return id == user.id &&
-                Objects.equals(name, user.name) &&
-                Objects.equals(email, user.email) &&
-                Objects.equals(password, user.password);
+        return id == user.id
+                && Objects.equals(name, user.name)
+                && Objects.equals(email, user.email
+        ) && Objects.equals(password, user.password);
     }
 
     @Override
@@ -64,11 +69,11 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return new StringJoiner(", ", User.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("email='" + email + "'")
+                .add("password='" + password + "'")
+                .toString();
     }
 }

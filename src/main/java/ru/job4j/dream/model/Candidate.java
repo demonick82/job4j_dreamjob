@@ -2,6 +2,7 @@ package ru.job4j.dream.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Candidate {
     private int id;
@@ -36,8 +37,8 @@ public class Candidate {
         return cityId;
     }
 
-    public void setCityId(int city_id) {
-        this.cityId = city_id;
+    public void setCityId(int cityId) {
+        this.cityId = cityId;
     }
 
     public LocalDate getCreated() {
@@ -50,13 +51,17 @@ public class Candidate {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         Candidate candidate = (Candidate) o;
-        return id == candidate.id &&
-                cityId == candidate.cityId &&
-                Objects.equals(name, candidate.name) &&
-                Objects.equals(created, candidate.created);
+        return id == candidate.id
+                && cityId == candidate.cityId
+                && Objects.equals(name, candidate.name)
+                && Objects.equals(created, candidate.created);
     }
 
     @Override
@@ -66,11 +71,11 @@ public class Candidate {
 
     @Override
     public String toString() {
-        return "Candidate{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", city_id=" + cityId +
-                ", created=" + created +
-                '}';
+        return new StringJoiner(", ", Candidate.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("cityId=" + cityId)
+                .add("created=" + created)
+                .toString();
     }
 }

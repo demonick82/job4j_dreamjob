@@ -40,15 +40,15 @@ public class CandidateServletTest {
         new CandidateServlet().doPost(req, resp);
 
         Candidate result = store.findAllCandidates().iterator().next();
-        assertEquals(result.getName(),("Name"));
-        assertEquals(result.getCityId(),(1));
+        assertEquals(result.getName(), ("Name"));
+        assertEquals(result.getCityId(), (1));
 
     }
 
     @Test
     public void whenDoPostUpdatePost() throws ServletException, IOException {
         Store store = MemStore.instOf();
-        Candidate candidate = new Candidate(1, "name",1, LocalDate.now());
+        Candidate candidate = new Candidate(1, "name", 1, LocalDate.now());
         store.saveCandidate(candidate);
         PowerMockito.mockStatic(PsqlStore.class);
         when(PsqlStore.instOf()).thenReturn(store);

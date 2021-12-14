@@ -1,6 +1,7 @@
 package ru.job4j.dream.model;
 
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class City {
 
@@ -30,11 +31,15 @@ public class City {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         City city = (City) o;
-        return id == city.id &&
-                Objects.equals(name, city.name);
+        return id == city.id
+                && Objects.equals(name, city.name);
     }
 
     @Override
@@ -44,9 +49,9 @@ public class City {
 
     @Override
     public String toString() {
-        return "City{" +
-                "name='" + name + '\'' +
-                ", id=" + id +
-                '}';
+        return new StringJoiner(", ", City.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .toString();
     }
 }

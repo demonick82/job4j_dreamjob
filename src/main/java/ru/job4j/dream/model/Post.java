@@ -2,6 +2,7 @@ package ru.job4j.dream.model;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.StringJoiner;
 
 public class Post {
     private int id;
@@ -70,11 +71,11 @@ public class Post {
 
     @Override
     public String toString() {
-        return "Post{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", created=" + created +
-                '}';
+        return new StringJoiner(", ", Post.class.getSimpleName() + "[", "]")
+                .add("id=" + id)
+                .add("name='" + name + "'")
+                .add("description='" + description + "'")
+                .add("created=" + created)
+                .toString();
     }
 }

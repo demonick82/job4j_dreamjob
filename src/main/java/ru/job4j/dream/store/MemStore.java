@@ -15,8 +15,8 @@ public class MemStore implements Store {
     private static final MemStore INST = new MemStore();
     private final Map<Integer, Post> posts = new ConcurrentHashMap<>();
     private final Map<Integer, Candidate> candidates = new ConcurrentHashMap<>();
-    private static AtomicInteger POST_ID = new AtomicInteger(4);
-    private static AtomicInteger CANDIDATE_ID = new AtomicInteger(4);
+    private static final AtomicInteger POST_ID = new AtomicInteger(4);
+    private static final AtomicInteger CANDIDATE_ID = new AtomicInteger(4);
 
 
     private MemStore() {
@@ -80,11 +80,6 @@ public class MemStore implements Store {
         candidates.remove(id);
     }
 
- /*   @Override
-    public Collection<User> findAllUsers() {
-        return null;
-    }
-*/
     @Override
     public void saveUser(User user) {
 
